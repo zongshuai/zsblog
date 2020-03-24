@@ -1,0 +1,23 @@
+#数据库驱动mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://49.233.164.73:3306/blog?useUnicode=true&characterEncoding=utf-8
+    username: blog
+    password: rootzs
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mvc:
+    favicon:
+      enabled: false
+
+#日志打印
+logging:
+  level:
+    root: info # root日志以info形式输出
+    com.zshuai: debug #com.zshuai包下面的日志全部以debug级别输出
+  file: log/blog-dev.log
+server:
+  port: 8989

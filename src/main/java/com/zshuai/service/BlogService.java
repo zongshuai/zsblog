@@ -24,7 +24,7 @@ public interface BlogService {
     Page<Blog> listBlog(Pageable pageable);
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
 
-    Page<Blog> listBlog(Long tagId, Pageable pageable);
+    Page<Blog> listBlog(Long tagId,Pageable pageable);
 
     /**
      * 模糊查询分页显示博客列表
@@ -32,7 +32,7 @@ public interface BlogService {
      * @param query
      * @return
      */
-    Page<Blog> listBlog(Pageable pageable, String query);
+    Page<Blog> listBlog(Pageable pageable,String query);
 
     //recommend根据是否推荐标签进行查询
     List<Blog> listRecommendBlogTop(Integer size);

@@ -1,0 +1,11 @@
+# thymeleaf 模板
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+  # 国际化
+  messages:
+    basename: i18n/message
+
+comment.avatar: /images/avatar.png

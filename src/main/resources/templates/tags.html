@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端预览-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <!--引入自定义CSS-->
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(3)" class="ui inverted attached segment segment m-padded-tb-mini m-shadow-small">
+    </nav>
+
+    <!--中间内容-->
+    <div class="m-container-small m-padded-tb-big">
+        <!--适应移动端手机-->
+        <div class="ui container">
+            <!--header-->
+            <div class="ui top attached segment">
+                <div class="ui middle aligned two column grid">
+                    <dvi class="column">
+                        <h3 class="ui teal header">标签</h3>
+                    </dvi>
+                    <dvi class="right aligned column">
+                        共 <h2 class="ui orange header m-inline-blok m-text-thin" th:text="${#arrays.length(tags)}">14</h2>个
+                    </dvi>
+                </div>
+            </div>
+            <!--分类列表区域-->
+            <div class="ui attached segment m-padded-tb-large   ">
+                <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"  th:classappend="${tag.id==avtiveTagId }? 'teal'"  class="ui  basic center pointing large label " th:each="tag : ${tags}">
+                    <span th:text="${tag.name}">JavaEE</span>
+                    <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
+                </a>
+                <!--/*-->
+                <a href="" class="ui  basic center pointing large label ">
+                    Spring
+                    <div class="detail">23</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    SpringMVC
+                    <div class="detail">23</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    SpringBoot
+                    <div class="detail">23</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    JavaSE
+                    <div class="detail m-margin-tb-tiny ">23</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    Oracle
+                    <div class="detail">4</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    MySQL
+                    <div class="detail">2</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    Redis
+                    <div class="detail">3</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    Dubbo
+                    <div class="detail">2</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    JavaScript
+                    <div class="detail">23</div>
+                </a>
+                <a href="" class="ui  basic center pointing large label ">
+                    jQuery
+                    <div class="detail">23</div>
+                </a>
+                <!--*/-->
+            </div>
+            <!--博客列表-->
+            <div class="ui top attached teal segment">
+                <div class="ui padded vertical segment m-padded-tb-large m-mobile-clear" th:each="blog : ${page.content}">
+                    <!--mobile reversed反序-->
+                    <div class="ui middle aligned grid mobile reversed stackable" >
+                        <div class="eleven wide column">
+                            <h3><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">庐山旅行记录-江西</a></h3>
+                            <p class="m-text" th:text="|${blog.description}.....|">庐山，又名匡山、
+                                匡庐，位于江西省九江市庐山市境内。介于东经115°52′—116°8′，北纬29°26′—29°41′之间。东偎婺源、鄱阳湖，南靠滕王阁，西邻京九铁路大通脉，北枕滔滔长江。 </p>
+                            <div class="ui grid">
+                                <div class="eleven wide column">
+                                    <div class="ui mini horizontal link list">
+                                        <div class="item">
+                                            <img src="https://picsum.photos/id/1011/100/100" alt="" class="ui avatar image" th:src="@{${blog.user.avatar}}"  >
+                                            <div class="content"> <a href="#" class="header" th:text="${blog.user.nickname}">叶仁平</a></div>
+                                        </div>
+                                        <div class="item">
+                                            <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2019-10-01</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="eye icon"></i><span th:text="${blog.views}">7437</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="five wide right aligned column">
+                                    <a href="#"  target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">认知升级</a>
+                                </div>
+                                <div class="row">
+                                    <div class="column">
+                                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui basic left pointing label m-padded-mini m-text-thin" th:classappend="${tag.id==avtiveTagId }? 'teal'"  th:each="tag : ${blog.tags}" th:text="${tag.name}">SpringBoot</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="five wide column">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                <img src="https://picsum.photos/id/1011/800/400" alt="" th:src="@{${blog.firstPicture}}" class="ui round image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--分页-->
+            <!--footer-->
+            <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+                <div class="ui middle aligned two column grid">
+                    <dvi class="column">
+                        <a href="#" th:href="@{/(page=${page.number}-1)}"  th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                    </dvi>
+                    <dvi class="right aligned column">
+                        <a href="#" th:href="@{/(page=${page.number}+1)}"  th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                    </dvi>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!--底部-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive ">
+    </footer>
+    <!--引入所需要的JS-->
+    <th:block th:replace="_fragments :: script">
+
+    <!--声明行内js代码域-->
+    <script>
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+
+    </script>
+</body>
+</html>
